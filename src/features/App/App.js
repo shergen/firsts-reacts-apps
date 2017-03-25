@@ -1,8 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import logo from './rsc/logo.svg';
-import './Demo.css';
-import { Button } from 'react-bootstrap';
+import './App.css';
+import { Button, Col } from 'react-bootstrap';
+import List from '../recipeList/recipeList.js'
+import DATA from '../recipeList/rsc/recipes.js';
 
 var bool: boolean = true;
 var nb: number = NaN;
@@ -32,8 +34,48 @@ var objTest: testObj<string> = {test: "azeazea"};
 var maybe: ?string = null
 
 
+type ingredient = {
+	display_index: number,
+	name: string,
+	department: string,
+	quantity: number,
+	unit: string	
+};
+type recipe = {
+	recipe_id: number,
+	title: string,
+	image_name: string,
+	instructions: string,
+	servings: string,
+	ingredients: Array<ingredient>
+};
 
 class App extends Component {
+  moreInfo: ?recipe;
+  data: Array<recipe>;
+  constructor (props: void) {
+	super(props);
+	this.data = DATA;
+	this.moreInfo = this.data[0];
+  }
+
+  get getData(): Array<recipe> {
+	return this.data;
+  }
+
+  set setData(data: Array<recipe>): App {
+	this.data = data;
+	return this;
+  }
+
+  get getMoreIngo(): recipe {
+	return this.moreInfo;
+  }
+
+  set setMoreInfo(recipe: recipe): App {
+	this.moreInfo = recipe;
+	return this;
+  }
   render() {
     return (
       <div className="App">
@@ -45,6 +87,17 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+	<Col sm={10} smOffset={1}>
+		{
+			this.data.map(function(object: recipe, i:number){
+				return <List data={object} key={i} />;
+			})
+		}
+		<Col sm={10} smOffset={1} className="more-infos-section">
+			{this.moreInfo.title}	
+		</Col>
+	</Col>
+	
       </div>
     );
   }
