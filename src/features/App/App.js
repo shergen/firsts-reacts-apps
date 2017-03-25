@@ -51,12 +51,10 @@ type recipe = {
 };
 
 class App extends Component {
-  moreInfo: ?recipe;
   data: Array<recipe>;
   constructor (props: void) {
 	super(props);
 	this.data = DATA;
-	this.moreInfo = this.data[0];
   }
 
   get getData(): Array<recipe> {
@@ -68,14 +66,6 @@ class App extends Component {
 	return this;
   }
 
-  get getMoreIngo(): recipe {
-	return this.moreInfo;
-  }
-
-  set setMoreInfo(recipe: recipe): App {
-	this.moreInfo = recipe;
-	return this;
-  }
   render() {
     return (
       <div className="App">
@@ -93,9 +83,6 @@ class App extends Component {
 				return <List data={object} key={i} />;
 			})
 		}
-		<Col sm={10} smOffset={1} className="more-infos-section">
-			{this.moreInfo.title}	
-		</Col>
 	</Col>
 	
       </div>
