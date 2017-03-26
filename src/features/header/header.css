@@ -1,4 +1,24 @@
 .navbar-nav .link-disabled {
 	pointer-events: none;
 	cursor: default;
+	color: #9d9d9d;
+}
+
+.link-disabled a {
+	color: inherit;
+}
+
+nav.navbar.navbar-inverse .container {
+	display: flex;
+	align-items:center;
+}
+
+a.navbar-brand {
+	padding: 0;
+	display: flex;
+	align-items: center;
+}
+
+ul.nav.navbar-nav li a span.fa{
+	margin-right:3px;
 }

@@ -37,34 +37,35 @@ var objTest: testObj<string> = {test: "azeazea"};
 var maybe: ?string = null*/
 
 
-type ingredient = {
+export type Ingredient = {
 	display_index: number,
 	name: string,
 	department: string,
 	quantity: number,
 	unit: string	
 };
-type recipe = {
+
+export type Recipe = {
 	recipe_id: number,
 	title: string,
 	image_name: string,
 	instructions: string,
 	servings: string,
-	ingredients: Array<ingredient>
+	ingredients: Array<Ingredient>
 };
 
 class App extends Component {
-  data: Array<recipe>;
+  data: Array<Recipe>;
   constructor (props: void) {
 	super(props);
 	this.data = DATA;
   }
 
-  get getData(): Array<recipe> {
+  get getData(): Array<Recipe> {
 	return this.data;
   }
 
-  set setData(data: Array<recipe>): App {
+  set setData(data: Array<Recipe>): App {
 	this.data = data;
 	return this;
   }

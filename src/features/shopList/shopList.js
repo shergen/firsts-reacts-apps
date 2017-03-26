@@ -1,25 +1,24 @@
 // @flow
 import React, { Component } from 'react';
 import './shopList.css';
-//import { Button, Col } from 'react-bootstrap';
-//import FA from 'react-fontawesome';
+import type {Recipe, Ingredient } from '../App/App.js';
+import { Col } from 'react-bootstrap';
+
+type Props = {
+	data: Array<Recipe>;
+}
 
 class ShopList extends Component {
-  constructor (props) {
+  dispArr: Array<Ingredient>;
+  constructor (props: Props) {
 	super(props);
-	this.getShopList = this.getShopList.bind(this);
-	this.ingredients = [];
+	(this:any).getShopList = this.getShopList.bind(this);
+	this.dispArr = this.ListToIngredients(this.getShopList()).sort((a,b) => {
+		return (a.department < b.department) ? -1 : (a.department > b.department) ? 1 : 0;
+	})
   }
 
-  PrintIngredients(tab) {
-	let ret;
-	tab.map((object) => {
-		ret = <p>{object.name}</p>;
-	});
-	return ret;
-  }
-
-  IngredientExist(tab, item) {
+  IngredientExist(tab: Array<Ingredient>, item: Ingredient) {
 	for (let i = 0; i < tab.length ;i++) {
 		if (tab[i].name === item.name) {
 			tab[i].quantity += item.quantity
@@ -30,34 +29,44 @@ class ShopList extends Component {
 	return false;
   }
 
-  ListToIngredients(val) {
+ListToIngredients(val: Array<any>) : Array<Ingredient> {
 	let ret = [];
-	val.map((object) => {
-		object.map((obj) => {
-			if (!this.IngredientExist(ret, obj))
-				ret.push(obj);	
+	if (val)
+		val.map((object) => {
+			object.map((obj) => {
+				if (!this.IngredientExist(ret, obj))
+					ret.push(obj);	
+			});
 		});
-	});
 	return ret;
   }
 
-  getShopList() {
+  getShopList(): Array<any> {
 	let ret = [];
 	if (ShopRecipe !== "") {
 		let ingredients = ShopRecipe.split(",");
-		ingredients.map((object) => {
+		ingredients.map((object: string) => {
 			if (object !== "")
-				ret.push(this.props.data[object - 1].ingredients);
+				ret.push(this.props.data[parseInt(object) - 1].ingredients);
 		});
 	}
 	return ret;
   }
   render() {
     return (
-	<div>
-		<h1>Shop list {ShopRecipe}</h1>
-		<h2>{this.PrintIngredients(this.ListToIngredients(this.getShopList()))}</h2>
-	</div>
+	<Col sm={12}>
+		<h1>Shop list</h1>
+		{
+			this.dispArr.map((object, i) => {
+				if (object.quantity) {
+					return (i > 0 && object.department === this.dispArr[parseInt(i) - 1].department) ? 
+						<p>{object.name} {object.quantity.toFixed(2).replace(/[.,]00$/, "")} {object.unit}</p> : 
+						<p><h2>{object.department}</h2>{object.name} {object.quantity.toFixed(2).replace(/[.,]00$/, "")} {object.unit}</p>;
+				}
+			})
+
+		}
+	</Col>
     );
   }
 }

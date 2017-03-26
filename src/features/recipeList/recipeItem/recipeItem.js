@@ -5,11 +5,16 @@ import './recipeItem.css';
 import { Button, Col } from 'react-bootstrap';
 import FA from 'react-fontawesome';
 import { setShopRecipe } from '../../shopList/shopList.js';
+import type {Recipe, Ingredient} from '../../App/App.js';
+
+type Props = {
+	data: Array<Recipe>;
+};
 
 class recipeItem extends Component {
-  constructor (props) {
+  constructor (props: Props) {
 	super(props);
-	this.dispMoreInfo = this.dispMoreInfo.bind(this);
+	(this:any).dispMoreInfo = this.dispMoreInfo.bind(this);
   }
   titlePreview(title: string): string { 
 	for (let i: number = 0; i < title.length; i++)
