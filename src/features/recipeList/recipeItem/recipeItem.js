@@ -18,7 +18,7 @@ class recipeItem extends Component {
   }
   titlePreview(title: string): string { 
 	for (let i: number = 0; i < title.length; i++)
-		if (i > 30)	
+		if (i >= 29)	
 			return title.slice(0, 26) + "...";
 	return title;
   }

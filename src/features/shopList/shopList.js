@@ -19,12 +19,14 @@ class ShopList extends Component {
   }
 
   IngredientExist(tab: Array<Ingredient>, item: Ingredient) {
-	for (let i = 0; i < tab.length ;i++) {
-		if (tab[i].name === item.name) {
-			tab[i].quantity += item.quantity
-			return true;
-		}
+	if (item) {
+		for (let i = 0; i < tab.length ;i++) {
+			if (tab[i].name === item.name) {
+				tab[i].quantity += item.quantity
+				return true;
+			}
 
+		}
 	}
 	return false;
   }

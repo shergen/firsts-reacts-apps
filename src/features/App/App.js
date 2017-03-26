@@ -75,10 +75,6 @@ class App extends Component {
     return (
 	<Router>
       		<div className="App">
-        		<div className="App-header">
-          			<img src={logo} className="App-logo" alt="logo" />
-          			<h2>Welcome to React</h2>
-        		</div>
 			<Header />
 			<Col sm={10} smOffset={1}>
 				<Route exact={true} path="/" render={() => (

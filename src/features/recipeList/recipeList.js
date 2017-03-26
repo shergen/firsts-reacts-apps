@@ -9,9 +9,11 @@ class recipeList extends Component {
     return (
 	<div>
 	{
-	this.props.data.map(function(object: Recipe, i: number) {
-		return <RecipeItem data={object} key={i} />;
-	})
+		(this.props && this.props.data) ?
+			this.props.data.map(function(object: Recipe, i: number) {
+				return <RecipeItem data={object} key={i} />;
+			})
+		: ""
 	}
 	</div>
     );
