@@ -1,0 +1,26 @@
+.recipeList {
+}
+
+.recipeList > img {
+	width:100%;
+}
+
+.recipeList .infos-section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.recipeList .infos-section h1 {
+	font-size: 24px;
+	margin:15px;
+}
+
+.recipeList .infos-section button {
+	margin:15px;
+}
+
+.recipeList .infos-section .more-infos-section {
+	position: absolute;
+	display: none;
+}

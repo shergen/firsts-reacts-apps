@@ -2,11 +2,14 @@
 import React, { Component } from 'react';
 import logo from './rsc/logo.svg';
 import './App.css';
-import { Button, Col } from 'react-bootstrap';
-import List from '../recipeList/recipeList.js'
+import { Col } from 'react-bootstrap';
+import RecipeList from '../recipeList/recipeList.js'
+import ShopList from '../shopList/shopList.js'
 import DATA from '../recipeList/rsc/recipes.js';
+import Header from '../header/header.js';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-var bool: boolean = true;
+/*var bool: boolean = true;
 var nb: number = NaN;
 var str: string = "Flow type tests";
 var nul: null = null;
@@ -31,7 +34,7 @@ type testType<ptr> = ptr;
 type testObj<ptr> = {test: ptr};
 var val: testType<string> = "blabl";
 var objTest: testObj<string> = {test: "azeazea"};
-var maybe: ?string = null
+var maybe: ?string = null*/
 
 
 type ingredient = {
@@ -66,26 +69,27 @@ class App extends Component {
 	return this;
   }
 
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-	<Button>Test</Button>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-	<Col sm={10} smOffset={1}>
-		{
-			this.data.map(function(object: recipe, i:number){
-				return <List data={object} key={i} />;
-			})
-		}
-	</Col>
+	<Router>
+      		<div className="App">
+        		<div className="App-header">
+          			<img src={logo} className="App-logo" alt="logo" />
+          			<h2>Welcome to React</h2>
+        		</div>
+			<Header />
+			<Col sm={10} smOffset={1}>
+				<Route exact={true} path="/" render={() => (
+					<RecipeList data={this.data} />
+				)} />
+				<Route path="/shop" render={() => (
+					<ShopList data={this.data} />
+				)} />
+			</Col>
 	
-      </div>
+      		</div>
+	</Router>
     );
   }
 }
